@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('customer_id');
             $table->string('email', 50);
-            $table->string('address', 50);
+            $table->string('address', 100);
             $table->string('phone_number', 20);
             $table->timestamps();
 
