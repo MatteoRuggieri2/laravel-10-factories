@@ -9,6 +9,7 @@ use Illuminate\Database\Seeder;
 use App\Models\Customer;
 use App\Models\CustomerInfo;
 use App\Models\Order;
+use App\Models\Product;
 
 class CustomerSeeder extends Seeder
 {
@@ -17,17 +18,21 @@ class CustomerSeeder extends Seeder
      */
     public function run(): void
     {
-        // Richiamo il metodo statico del model che evocherà la factory giusta (se abbiamo rispettato le convenzioni di laravel)
-        // Questo genererà 1 Customer
+        //? Richiamo il metodo statico del model che evocherà la factory giusta (se abbiamo rispettato le convenzioni di laravel)
+        //? Questo genererà 1 Customer
         // Customer::factory()->create();
         
-        // Creo più Customer con "->count(5)"
+        //? Creo più Customer con "->count(5)"
         // Customer::factory()->count(5)->create();
 
         // Creo 5 Customer che hanno in relazione 1 gruppo di informazioni e 3 ordini ognuno
         Customer::factory()
-                ->has(CustomerInfo::factory()->count(1))  // 1 to 1
-                ->has(Order::factory()->count(3))  // 1 to many
+                ->has(CustomerInfo::factory()->count(1))          // 1 to 1
+                ->has(Order::factory()                            // 1 to many
+                           ->count(rand(1,5))
+                           ->hasAttached(Product::factory()       // Pivot Table
+                                                ->count(rand(1,3))
+                                                ->create()))
                 ->count(5)
                 ->create();
     }
