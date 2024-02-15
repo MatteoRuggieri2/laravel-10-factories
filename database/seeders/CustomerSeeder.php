@@ -25,7 +25,7 @@ class CustomerSeeder extends Seeder
         //? Creo più Customer con "->count(5)"
         // Customer::factory()->count(5)->create();
 
-        // Creo 5 Customer che hanno in relazione 1 gruppo di informazioni e 3 ordini ognuno
+        // Creo 5 Customer che hanno in relazione 1 gruppo di informazioni e 1-5 ordini ognuno. Ogni ordine ha relazionato 1-3 prodotti.
         Customer::factory()
                 ->has(CustomerInfo::factory()->count(1))          // 1 to 1
                 ->has(Order::factory()                            // 1 to many
