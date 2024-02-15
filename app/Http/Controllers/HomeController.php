@@ -9,10 +9,10 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $customer = Customer::first();
+        $customers = Customer::all();
 
         $data = [
-            'relation' => $customer,
+            'customers' => $customers,
         ];
 
         return view('relation_test', $data);
